@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-class OrderManager
+class MessageManager
 {
-	public function returnOrder(string $id): array|false
+	public function returnMessage(string $id): array|false
 	{
 		return Db::queryOne('
 			SELECT `createdAt`,

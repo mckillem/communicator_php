@@ -12,8 +12,8 @@ class RouterController extends Controller
 
 		try {
 			if (!empty($parsedURL)) {
-				if ($parsedURL[0] === "order") {
-					$this->controller = new OrderController();
+				if ($parsedURL[0] === "message") {
+					$this->controller = new MessageController();
 
 					$this->controller->process($parsedURL);
 				} else {
