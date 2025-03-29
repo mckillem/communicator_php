@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: test
       MYSQL_PASSWORD: test
-      MYSQL_DATABASE: communicator_php
+      MYSQL_DATABASE: communicator_php_db
     volumes:
       - ./build/database/01_create.sql:/docker-entrypoint-initdb.d/01_create.sql
 

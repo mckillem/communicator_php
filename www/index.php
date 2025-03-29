@@ -1,21 +1,21 @@
 <?php
 
-use app\controllers\RouterController;
-use app\models\Db;
+use App\CoreModule\System\Controllers\RouterController;
+use ItNetwork\Db;
 
 session_start();
 
 mb_internal_encoding("UTF-8");
 
-function autoloader(string $class): void
+function autoloader($class): void
 {
-	if (str_ends_with($class, 'Controller')) {
-		$controllerClass = str_replace("app\\controllers\\", "", $class);
-		require('../app/controllers/' . $controllerClass . '.php');
-	} else {
-		$controllerClass = str_replace("app\\models\\", "", $class);
-		require('../app/models/' . $controllerClass . '.php');
-	}
+	if (mb_strpos($class, 'App\\') !== false)
+		$class = 'a' . ltrim($class, 'A');
+	else
+		$class = 'vendor\\' . $class;
+	$path = str_replace('\\', '/', $class) . '.php';
+	if (file_exists('../' . $path))
+		include('../' . $path);
 }
 
 spl_autoload_register("autoloader");
@@ -23,5 +23,6 @@ spl_autoload_register("autoloader");
 Db::connect("database", "test", "test", "communicator_php_db");
 
 $router = new RouterController();
-$router->process(array($_SERVER['REQUEST_URI']));
+$router->index(array($_SERVER['REQUEST_URI']));
 
+$router->renderView();
