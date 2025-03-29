@@ -15,51 +15,40 @@ class MessageManager
 		', array($id));
 	}
 
-	public function getAllMessages()
+	public function getAllMessages(): false|array
 	{
-		// Připravit SQL dotaz
-// Vybrat vše z tabulky "chat", řadit sestupně podle sloupce pro čas
-//		$query = $pdo->prepare("SELECT * FROM `messages` ORDER BY `time` DESC");
-
-// Vykonat připravený dotaz
-//		$query->execute();
-
-// Získat všechny řádky z dotazu
-//		$messages = $query->fetchAll();
-
-// Iterovat přes každý řádek a vypsat jej
-//		foreach ($messages as $message) {
-//			echo "<p>(" . date("d. m. H:i:s", $message["time"]) . ") <b>" . htmlspecialchars($message["username"]) . "</b>: " . htmlspecialchars($message["message"]) . "</p>";
-//		}
-
 		return \ItNetwork\Db::queryAll("SELECT * FROM `message`");
 	}
 
-	public function sendMessage(array $data): bool
+	public function sendMessage(array $data): void
 	{
-		// Ověření, jestli není jméno nebo zpráva prázdná
-		if (!empty($_POST["username"]) && !empty($_POST["message"])) {
+		$message = [
+			'text' => $data['text'],
+			'createdAt' => new \DateTime()->format('Y-m-d H:i:s'),
+			'deletedAt' => new \DateTime()->format('Y-m-d H:i:s'),
+			'deliveredAt' => new \DateTime()->format('Y-m-d H:i:s'),
+			'readAt' => new \DateTime()->format('Y-m-d H:i:s'),
+//			todo: vložit ze ssesion?
+			'createdBy' => 1,
+		];
 
-			// Inicializovat sezení
-			session_start();
+		\ItNetwork\Db::insert('message', $message);
 
-			// Vytvořit spojení s databází ze souboru db.php
-			require "db.php";
+		$message_user = [
+			'message_id' => \ItNetwork\Db::getLastId(),
+			'user_id' => $this->getUserByEmail($data['username'])['user_id'],
+		];
 
-			// Připravit SQL dotaz
-			$query = $pdo->prepare("INSERT INTO `messages` (`username`, `message`, `time`) VALUES (?, ?, ?)");
-
-			// Vykonat dotaz s parametry
-			$query->execute([
-				$_POST["username"],
-				$_POST["message"],
-				time() // Aktuální čas v unixovém formátu
-			]);
-
-			// Nastavit jméno do sezení pro zapamatování
-			$_SESSION["username"] = htmlspecialchars($_POST["username"]);
-		}
-
-		return \ItNetwork\Db::insert('message', $data);
+		\ItNetwork\Db::insert('message_user', $message_user);
 	}
+
+	public function getUserByEmail(string $email): array
+	{
+		return \ItNetwork\Db::queryOne('SELECT `user_id` FROM `user` WHERE `email` = ?', array($email));
+	}
+
+//	public function getMessageById(string $id): int
+//	{
+//		return \ItNetwork\Db::queryOne('message',  ['message_id' => $id]);
+//	}
 }

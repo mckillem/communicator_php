@@ -2,46 +2,6 @@
     <h1>Zprávy</h1>
 </header>
 <section>
-    <div class="wrapper">
-        <form>
-            <label for="username">Jméno:</label>
-            <input type="text" name="username" id="username" value="<?= $_SESSION["email"] ?? "" ?>">
-            <label for="message">Zpráva:</label>
-            <input type="text" name="message" id="message">
-            <button type="button" onclick="send()">Odeslat</button>
-        </form>
-    </div>
-
-    <div id="messages"></div>
+	<?= $text ?>
+	<?= $form->render() ?>
 </section>
-
-
-<script>
-	function send() {
-		// Vytvořit AJAX požadavek metodou POST
-		$.post("send_message.php", // URL pro požadavek
-			{
-				"username" : $("#username").val(), // Objekt s hodnotami pro odeslání
-				"message" : $("#message").val()
-			},
-			function (data) { // Callback funkce při úspěchu
-				$("#message").val(""); // Smazat obsah pole pro zprávu
-			}
-		);
-		reloadMessages(); // Ihned aktualizujeme právě odeslanou zprávu
-	}
-
-	function reloadMessages() {
-		// Vytvořit AJAX požadavek metodou GET
-		$.get("get_messages.php", function(data) {
-			$("#messages").html(data); // Nastavit obsah zpráv na výstup požadavku
-		});
-	}
-
-	// Prvotně načíst zprávy
-	reloadMessages();
-
-	// Vykonat funkci v určeném intervalu
-	// 3000 ms = 3 sekundy
-	setInterval(reloadMessages, 3000);
-</script>
