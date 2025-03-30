@@ -2,6 +2,10 @@
     <h1>Zprávy</h1>
 </header>
 <section>
-	<?= $text ?>
+	<?php foreach ($messages as $value): ?>
+    <?php foreach ($value as $item): ?>
+    <?= $item ?>
+    <?php endforeach; ?>
+    <?php endforeach; ?>
 	<?= $form->render() ?>
 </section>

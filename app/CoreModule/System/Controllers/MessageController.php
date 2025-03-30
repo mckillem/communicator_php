@@ -16,13 +16,23 @@ class MessageController extends Controller
 		$messageManager = new MessageManager();
 
 		$this->getMessages();
-		$this->data['text'] = $messageManager->getAllMessages();
+
+		$this->data['messages'] = $messageManager->getAllMessages();
 
 		$form = $this->getMessageForm();
 		$this->data['form'] = $form;
 
-		$data = $form->getData();
-		$messageManager->sendMessage($data);
+		if ($form->isPostBack())
+		{
+			try
+			{
+				$data = $form->getData();
+				$messageManager->sendMessage($data);
+			} catch (UserException $e)
+			{
+				$this->addMessage($e->getMessage());
+			}
+		}
 
 		$this->view = 'index';
 	}

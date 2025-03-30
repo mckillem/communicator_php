@@ -9,9 +9,9 @@ class MessageManager
 		return \ItNetwork\Db::queryOne('
 			SELECT *
 			FROM `message`
-			JOIN `message_item` on `order`.`order_id` = ?
-			JOIN `item` on `message_item`.`item_id`
-			where `message_item`.`item_id` = `item`.`item_id`
+			JOIN `message_user` on `message`.`message_id` = ?
+			JOIN `user` on `message_user`.`user_id`
+			where `message_user`.`user_id` = `user`.`user_id`
 		', array($id));
 	}
 
