@@ -32,7 +32,7 @@ class MessageManager
 //			'readAt' => new \DateTime()->format('Y-m-d H:i:s'),
 //			todo: vložit ze ssesion?
 			'createdBy' => UserManager::$user['user_id'],
-			'createdFor' => 2,
+			'createdFor' => $data['users'],
 		];
 
 		Db::sendMessage($message);

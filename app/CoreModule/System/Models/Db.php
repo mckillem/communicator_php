@@ -77,4 +77,18 @@ insert into message set
 
 		return $sql->fetch(self::$connection::FETCH_ASSOC);
 	}
+
+	public static function getAllUsers(): array
+	{
+		$sql = self::$connection->prepare(
+			'
+			SELECT *
+			FROM `user`
+		'
+		);
+		$sql->execute();
+
+		return $sql->fetchAll(self::$connection::FETCH_ASSOC);
+	}
+
 }

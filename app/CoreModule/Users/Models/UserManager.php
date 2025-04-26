@@ -22,4 +22,9 @@ class UserManager
 	{
 		self::$user = $_SESSION['user'] ?? null;
 	}
+
+	public function getAllUsers(): array
+	{
+		return Db::getAllUsers();
+	}
 }

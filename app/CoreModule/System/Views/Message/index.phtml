@@ -10,8 +10,19 @@
     <?php endforeach; ?>
     <form method="post">
         <label>
+            Komu<br />
+            <select name="users">
+                <option value="">--- Vyber uživatele ---</option>
+                <?php foreach($users as $user): ?>
+                    <?php if ($user['user_id'] !== $loggedUser['user_id']): ?>
+                        <option value=<?= $user['user_id']; ?>><?php echo($user['firstname']); ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+        </label><br />
+        <label>
             Zpráva<br />
-            <input type="text" name="text" required="required" value="<?php if (isset($this->page['controller'])) echo($this->page['controller']) ?>" />
+            <input type="text" name="text" required="required" />
         </label><br />
         <input type="submit" value="Poslat" />
     </form>
