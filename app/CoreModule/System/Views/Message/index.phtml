@@ -1,6 +1,6 @@
 <header>
     <h1>Zprávy</h1>
-    <a href="message/logout">Odhlásit</a>
+    <a href="logout">Odhlásit</a>
 </header>
 <section>
 	<?php foreach ($messages as $value): ?>
@@ -8,7 +8,6 @@
             <?= $item ?>
         <?php endforeach; ?> <br>
     <?php endforeach; ?>
-<!--	--><?php //= $form->render() ?>
     <form method="post">
         <label>
             Zpráva<br />

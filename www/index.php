@@ -9,7 +9,10 @@ mb_internal_encoding("UTF-8");
 
 function autoloader($class): void
 {
-	$class = 'vendor\\' . $class;
+	if (mb_strpos($class, 'App\\') !== false)
+		$class = 'a' . ltrim($class, 'A');
+	else
+		$class = 'vendor\\' . $class;
 	$path = str_replace('\\', '/', $class) . '.php';
 	if (file_exists('../' . $path))
 		include('../' . $path);
