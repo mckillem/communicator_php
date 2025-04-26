@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 # heslo itnetwork
 INSERT INTO `user` (`user_id`, `firstname`, `lastname`, `email`, `password`, `role`) VALUES
     (1, 'Matěj', 'Musil', 'matej@email.cz', '$2y$10$arJIJie/xGoqZayCro4yZ.pPEkt9Ps4DJBNZAHSZ/rvbOkj//K/tq', 'admin'),
-    (2, 'Lada', 'Nie', 'lada@email.cz', '$2y$10$arJIJie/xGoqZayCro4yZ.pPEkt9Ps4DJBNZAHSZ/rvbOkj//K/tq', 'admin');
+    (2, 'Lada', 'Nie', 'lada@email.cz', '$2y$10$arJIJie/xGoqZayCro4yZ.pPEkt9Ps4DJBNZAHSZ/rvbOkj//K/tq', 'admin'),
+    (3, 'cizí', 'Nie', 'cizi@email.cz', '$2y$10$arJIJie/xGoqZayCro4yZ.pPEkt9Ps4DJBNZAHSZ/rvbOkj//K/tq', 'admin');
 
 CREATE TABLE `message`
 (

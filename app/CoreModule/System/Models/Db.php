@@ -33,7 +33,7 @@ class Db
 	{
 		$sql = self::$connection->prepare(
 			'
-			SELECT `message_id`, `text`
+			SELECT *
 			FROM `message`
 			ORDER BY `message_id` DESC
 		'

@@ -3,10 +3,10 @@
     <a href="logout">Odhlásit</a>
 </header>
 <section>
-	<?php foreach ($messages as $value): ?>
-        <?php foreach ($value as $item): ?>
-            <?= $item ?>
-        <?php endforeach; ?> <br>
+	<?php foreach ($messages as $message): ?>
+	    <?php if ($loggedUser['user_id'] === $message['createdBy'] || $loggedUser['user_id'] === $message['createdFor']): ?>
+            <?= $message['text'] ?>
+		<?php endif; ?>
     <?php endforeach; ?>
     <form method="post">
         <label>
