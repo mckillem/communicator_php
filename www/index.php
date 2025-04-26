@@ -1,7 +1,7 @@
 <?php
 
 use App\CoreModule\System\Controllers\RouterController;
-use ItNetwork\Db;
+use App\CoreModule\System\Models\Db;
 
 session_start();
 
@@ -9,10 +9,7 @@ mb_internal_encoding("UTF-8");
 
 function autoloader($class): void
 {
-	if (mb_strpos($class, 'App\\') !== false)
-		$class = 'a' . ltrim($class, 'A');
-	else
-		$class = 'vendor\\' . $class;
+	$class = 'vendor\\' . $class;
 	$path = str_replace('\\', '/', $class) . '.php';
 	if (file_exists('../' . $path))
 		include('../' . $path);
