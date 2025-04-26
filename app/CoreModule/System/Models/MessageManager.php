@@ -2,6 +2,8 @@
 
 namespace App\CoreModule\System\Models;
 
+use App\CoreModule\Users\Models\UserManager;
+
 class MessageManager
 {
 //	public function returnMessage(string $id): array|false
@@ -29,7 +31,7 @@ class MessageManager
 //			'deliveredAt' => new \DateTime()->format('Y-m-d H:i:s'),
 //			'readAt' => new \DateTime()->format('Y-m-d H:i:s'),
 //			todo: vložit ze ssesion?
-			'createdBy' => 1,
+			'createdBy' => UserManager::$user['user_id'],
 			'createdFor' => 2,
 		];
 
