@@ -18,14 +18,15 @@ CREATE TABLE `message`
 (
     `message_id`       INT(11)      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `text` VARCHAR(255) NOT NULL,
-    `read` boolean NOT NULL default 0,
-    `delivered` boolean NOT NULL default 0,
-    `deleted` boolean NOT NULL default 0,
-    `createdAt` datetime NOT NULL,
-    `deletedAt` datetime NOT NULL,
-    `deliveredAt` datetime NOT NULL,
-    `readAt` datetime NOT NULL,
-    `createdBy` int(11) NOT NULL
+#     `read` boolean NOT NULL default 0,
+#     `delivered` boolean NOT NULL default 0,
+#     `deleted` boolean NOT NULL default 0,
+#     `createdAt` datetime NOT NULL,
+#     `deletedAt` datetime NOT NULL,
+#     `deliveredAt` datetime NOT NULL,
+#     `readAt` datetime NOT NULL,
+    `createdBy` int(11) NOT NULL,
+    `createdFor` int(11) NOT NULL
 ) ENGINE = InnoDB
   CHARSET = utf8;
 

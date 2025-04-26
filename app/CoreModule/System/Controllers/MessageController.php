@@ -3,15 +3,13 @@
 namespace App\CoreModule\System\Controllers;
 
 use App\CoreModule\System\Models\MessageManager;
-use ItNetwork\Forms\Form;
-use ItNetwork\UserException;
+use App\CoreModule\Users\Models\UserManager;
 
 class MessageController extends Controller
 {
-	/**
-	 * @throws UserException
-	 */
-	function process(array $parameters): void
+	protected Controller $controller;
+
+	function index(array $parameters): void
 	{
 		$messageManager = new MessageManager();
 
@@ -19,31 +17,39 @@ class MessageController extends Controller
 
 		$this->data['messages'] = $messageManager->getAllMessages();
 
-		$form = $this->getMessageForm();
-		$this->data['form'] = $form;
-
-		if ($form->isPostBack())
+		if (!empty($_POST) && $_POST['text'])
 		{
-			try
-			{
-				$data = $form->getData();
-				$messageManager->sendMessage($data);
-			} catch (UserException $e)
-			{
-				$this->addMessage($e->getMessage());
-			}
+				$messageManager->sendMessage($_POST);
+
+				$this->redirect();
 		}
+//			try
+//			{
+//				$data = $form->getData();
+//			} catch (UserException $e)
+//			{
+//				$this->addMessage($e->getMessage());
+//			}
+//		}
 
 		$this->view = 'index';
 	}
 
-	private function getMessageForm(): Form
-	{
-		$form = new Form('message');
-		$form->addTextBox('username', 'Komu', true);
-		$form->addTextArea('text', 'Zpráva', true);
-		$form->addButton('submit', 'Odeslat');
+//	private function getMessageForm(): Form
+//	{
+//		$form = new Form('message');
+//		$form->addTextBox('username', 'Komu', true);
+//		$form->addTextArea('text', 'Zpráva', true);
+//		$form->addButton('submit', 'Odeslat');
+//
+//		return $form;
+//	}
 
-		return $form;
+	public function logout(): void
+	{
+		echo 'nnnnn';
+		$userManager = new UserManager();
+		$userManager->logout();
+		$this->redirect('prihlaseni');
 	}
 }

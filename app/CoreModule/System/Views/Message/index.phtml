@@ -1,11 +1,19 @@
 <header>
     <h1>Zprávy</h1>
+    <a href="message/logout">Odhlásit</a>
 </header>
 <section>
 	<?php foreach ($messages as $value): ?>
-    <?php foreach ($value as $item): ?>
-    <?= $item ?>
+        <?php foreach ($value as $item): ?>
+            <?= $item ?>
+        <?php endforeach; ?> <br>
     <?php endforeach; ?>
-    <?php endforeach; ?>
-	<?= $form->render() ?>
+<!--	--><?php //= $form->render() ?>
+    <form method="post">
+        <label>
+            Zpráva<br />
+            <input type="text" name="text" required="required" value="<?php if (isset($this->page['controller'])) echo($this->page['controller']) ?>" />
+        </label><br />
+        <input type="submit" value="Poslat" />
+    </form>
 </section>
