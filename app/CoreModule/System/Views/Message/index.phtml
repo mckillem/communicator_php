@@ -5,7 +5,7 @@
 <section>
 	<?php foreach ($messages as $message): ?>
 	    <?php if ($loggedUser['user_id'] === $message['createdBy'] || $loggedUser['user_id'] === $message['createdFor']): ?>
-            <?= $message['text'] ?>
+			<?= date_format(date_create($message['createdAt']), 'd.m. Y H:i:s') ?> -- <?= $message['text'] ?>
 		<?php endif; ?>
     <?php endforeach; ?>
     <form method="post">
@@ -15,7 +15,7 @@
                 <option value="">--- Vyber uživatele ---</option>
                 <?php foreach($users as $user): ?>
                     <?php if ($user['user_id'] !== $loggedUser['user_id']): ?>
-                        <option value=<?= $user['user_id']; ?>><?php echo($user['firstname']); ?></option>
+                        <option value=<?= $user['user_id']; ?>><?= $user['firstname']; ?></option>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </select>

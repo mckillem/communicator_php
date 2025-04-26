@@ -49,11 +49,14 @@ class Db
 			$sql = self::$connection->prepare("
 insert into message set
 		text = :text,
+		createdAt = :createdAt,
 		createdBy = :createdBy,
 		createdFor = :createdFor
 		");
 			$sql->execute(array(
 				':text' => $message['text'],
+//				todo: čas v db je o dvě hodiny nižší
+				':createdAt' => $message['createdAt'],
 				':createdBy' => $message['createdBy'],
 				':createdFor' => $message['createdFor']
 			));

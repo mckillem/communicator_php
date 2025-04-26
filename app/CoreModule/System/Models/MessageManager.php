@@ -26,7 +26,7 @@ class MessageManager
 	{
 		$message = [
 			'text' => $data['text'],
-//			'createdAt' => new \DateTime()->format('Y-m-d H:i:s'),
+			'createdAt' => new \DateTime()->format('Y-m-d H:i:s'),
 //			'deletedAt' => new \DateTime()->format('Y-m-d H:i:s'),
 //			'deliveredAt' => new \DateTime()->format('Y-m-d H:i:s'),
 //			'readAt' => new \DateTime()->format('Y-m-d H:i:s'),

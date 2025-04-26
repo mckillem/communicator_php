@@ -22,7 +22,7 @@ CREATE TABLE `message`
 #     `read` boolean NOT NULL default 0,
 #     `delivered` boolean NOT NULL default 0,
 #     `deleted` boolean NOT NULL default 0,
-#     `createdAt` datetime NOT NULL,
+    `createdAt` datetime NOT NULL,
 #     `deletedAt` datetime NOT NULL,
 #     `deliveredAt` datetime NOT NULL,
 #     `readAt` datetime NOT NULL,
