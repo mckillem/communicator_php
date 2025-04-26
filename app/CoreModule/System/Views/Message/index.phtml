@@ -5,7 +5,13 @@
 <section>
 	<?php foreach ($messages as $message): ?>
 	    <?php if ($loggedUser['user_id'] === $message['createdBy'] || $loggedUser['user_id'] === $message['createdFor']): ?>
-			<?= date_format(date_create($message['createdAt']), 'd.m. Y H:i:s') ?> -- <?= $message['text'] ?>
+			<p
+                <?php if ($loggedUser['user_id'] === $message['createdBy']): ?>
+                    style="color: blue"
+				<?php endif; ?>
+            >
+                <?= date_format(date_create($message['createdAt']), 'd.m. Y H:i:s') ?> -- <?= $message['text'] ?>
+            </p>
 		<?php endif; ?>
     <?php endforeach; ?>
     <form method="post">
